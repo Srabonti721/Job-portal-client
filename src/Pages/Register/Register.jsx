@@ -2,6 +2,7 @@ import { Lottie } from "lottie-react";
 import { use } from "react";
 import lottiesRegister from "../../assets/lotties/Register.json";
 import { AuthContext } from "../../context/AuthProvider";
+import SocialLogin from "../Shared/SocialLogin";
 const Regsiter = () => {
     const { createUser } = use(AuthContext);
     
@@ -66,6 +67,7 @@ const Regsiter = () => {
                                 </button>
                             </fieldset>
                         </form>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>
