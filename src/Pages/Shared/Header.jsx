@@ -1,6 +1,7 @@
 import { use } from "react";
 import { NavLink } from "react-router";
 import { AuthContext } from "../../context/AuthProvider";
+import job from "../../assets/icons/jobBox.png"
 
 const Header = () => {
     const { user, signOutUser } = use(AuthContext);
@@ -52,7 +53,8 @@ const Header = () => {
                         {links}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">Job Portal</a>
+                <img src={job} alt="" />
+                <a className="font-semibold text-2xl"> Job Portal</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">{links}</ul>
