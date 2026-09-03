@@ -16,7 +16,8 @@ import Details from "../Pages/HotJobs/Details";
             },
             {
                 path:"jobs/:id",
-                Component:Details
+                Component:Details,
+                loader:({params})=>fetch(`http://localhost:5000/jobs/${params.id}`)
             },
             {
                 path:'register',
