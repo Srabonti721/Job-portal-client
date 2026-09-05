@@ -14,6 +14,14 @@ const JobApply = () => {
     const github = form.github.value;
     const resume = form.resume.value;
     console.log(linkedIn, github, resume);
+
+    const application ={
+      jobID,
+      applicant:user.email,
+      linkedIn,
+      github, 
+      resume
+    }
     
   }
   
