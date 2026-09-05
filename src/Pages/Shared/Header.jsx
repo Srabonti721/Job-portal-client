@@ -1,7 +1,7 @@
 import { use } from "react";
 import { NavLink } from "react-router";
+import job from "../../assets/icons/jobBox.png";
 import { AuthContext } from "../../context/AuthProvider";
-import job from "../../assets/icons/jobBox.png"
 
 const Header = () => {
     const { user, signOutUser } = use(AuthContext);
@@ -19,6 +19,13 @@ const Header = () => {
             <li>
                 <NavLink to="/">Home</NavLink>
             </li>
+            {user && (
+                <>
+                    <li>
+                        <NavLink to="/myApplication">My Application</NavLink>
+                    </li>
+                </>
+            )}
         </>
     );
     return (
