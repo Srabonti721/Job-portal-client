@@ -26,6 +26,12 @@ const Header = () => {
                     </li>
                 </>
             )}
+            {
+                user && 
+                   <li>
+                <NavLink to="/addJob">Add Job</NavLink>
+            </li>
+            }
         </>
     );
     return (

@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthProvider";
 const PrivateRoutes = ({ children }) => {
     const { user , loading} = use(AuthContext);
     const location = useLocation();
-    console.log(location.pathname);
+
     if(loading){
 return <span className="loading loading-spinner loading-xl"></span>
     }
