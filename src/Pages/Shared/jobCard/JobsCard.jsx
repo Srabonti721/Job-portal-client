@@ -12,6 +12,8 @@ const JobsCard = ({ job }) => {
         description,
         requirements,
     } = job;
+
+    
     return (
         <div className="card bg-base-100 shadow-sm">
             <div className="flex items-center gap-2">
@@ -33,8 +35,8 @@ const JobsCard = ({ job }) => {
                     <div className="badge badge-secondary">NEW</div>
                 </h2>
                 <h2 className="text-sm">
-                    Salary: {salaryRange.min} - {salaryRange.max}{" "}
-                    {salaryRange.currency}
+                    Salary: {salaryRange?.min} - {salaryRange?.max}{" "}
+                    {salaryRange?.currency}
                 </h2>
                 <p>{description}</p>
                 <div className="card-actions">

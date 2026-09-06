@@ -1,24 +1,50 @@
+import axios from "axios";
+import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 
 const AddJob = () => {
-    const {user} = useAuth();
+    const { user } = useAuth();
     const handleAddAJob = (e) => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
-// Salary range
-        const {min, max, currency, ...newJob} = data;
-        newJob.SalaryRange = {min, max, currency};
+        // Salary range
+        const { min, max, currency, ...newJob } = data;
+        newJob.salaryRange = { min, max, currency };
         // requirement
         const requirementString = newJob.requirements;
         const requirementsDirty = requirementString.split(",");
-        const requirementsClean = requirementsDirty.map(req=>req.trim());
-        newJob.requirements = requirementsClean
-// responsibilities
-newJob.responsibilities = newJob.responsibilities.split(",").map(req=>req.trim())
-        console.log(newJob);
+        const requirementsClean = requirementsDirty.map((req) => req.trim());
+        newJob.requirements = requirementsClean;
+        // responsibilities
+        newJob.responsibilities = newJob.responsibilities
+            .split(",")
+            .map((req) => req.trim());
+
+        newJob.status = "active";
+        // console.log(newJob);
+
+        // use axios
+        axios
+            .post("http://localhost:5000/jobs", newJob)
+            .then((res) => {
+                console.log(res.data);
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "This jobs work has been saved and publices",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
+
     return (
         <div className="w-5xl mx-auto">
             <h2 className="text-center text-3xl my-4">Please add a job</h2>
@@ -71,18 +97,21 @@ newJob.responsibilities = newJob.responsibilities.split(",").map(req=>req.trim()
                             className="btn"
                             type="radio"
                             name="jobType"
+                            value={"on-site"}
                             aria-label="On-Site"
                         />
                         <input
                             className="btn"
                             type="radio"
                             name="jobType"
+                            value={"remote"}
                             aria-label="Remote"
                         />
                         <input
                             className="btn"
                             type="radio"
                             name="jobType"
+                            value={"hybrid"}
                             aria-label="Hybrid"
                         />
                     </div>
@@ -104,7 +133,11 @@ newJob.responsibilities = newJob.responsibilities.split(",").map(req=>req.trim()
                 {/* Deadline */}
                 <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
                     <legend className="fieldset-legend">Deadline</legend>
-                    <input type="date" className="input w-full" />
+                    <input
+                        name="deadline"
+                        type="date"
+                        className="input w-full"
+                    />
                 </fieldset>
                 {/* salary Range */}
                 <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
