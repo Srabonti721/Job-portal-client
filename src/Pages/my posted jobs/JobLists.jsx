@@ -1,4 +1,5 @@
 import React, { use } from 'react'
+import { Link } from 'react-router';
 
 const JobLists = ({myPostedJobsPromice}) => {
     const jobs = use(myPostedJobsPromice);
@@ -16,7 +17,7 @@ const JobLists = ({myPostedJobsPromice}) => {
         <th>#</th>
         <th>Name</th>
         <th>Deadline</th>
-        <th>Favorite Color</th>
+        <th>View Applications</th>
       </tr>
     </thead>
     <tbody>
@@ -26,7 +27,7 @@ const JobLists = ({myPostedJobsPromice}) => {
         <th>{index + 1}</th>
         <td>{job.title}</td>
         <td>{job.deadline}</td>
-        <td>Blue</td>
+        <td><Link to={`/applications/${job._id}`}>View Applilcations</Link></td>
       </tr>)
       }
  
