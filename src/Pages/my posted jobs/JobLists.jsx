@@ -17,6 +17,7 @@ const JobLists = ({myPostedJobsPromice}) => {
         <th>#</th>
         <th>Name</th>
         <th>Deadline</th>
+        <th>Count</th>
         <th>View Applications</th>
       </tr>
     </thead>
@@ -27,6 +28,7 @@ const JobLists = ({myPostedJobsPromice}) => {
         <th>{index + 1}</th>
         <td>{job.title}</td>
         <td>{job.deadline}</td>
+        <td>0</td>
         <td><Link to={`/applications/${job._id}`}>View Applilcations</Link></td>
       </tr>)
       }
