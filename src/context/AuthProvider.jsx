@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
@@ -8,10 +9,9 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.init";
-import axios from "axios";
 export const AuthContext = createContext(null);
 
-const googleProvider = new GoogleAuthProvider()
+const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
@@ -25,23 +25,23 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     };
-    const signInWithGoogle = () =>{
-        return signInWithPopup(auth, googleProvider)
-    }
+    const signInWithGoogle = () => {
+        return signInWithPopup(auth, googleProvider);
+    };
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             setLoading(false);
-            if(currentUser?.email){
-                const userData = {email: currentUser.email};
-                axios.post("http://localhost:5000/jwt", userData)
-                .then(res=>{
-                    console.log("token after jwt :",res.data);
-                    const token = res.data.token;
-                    localStorage.setItem("token:",token);
-                    
-                })
-                .catch(error=>console.log(error))
+            if (currentUser?.email) {
+                const userData = { email: currentUser.email };
+                axios
+                    .post("http://localhost:5000/jwt", userData, {
+                        withCredentials: true,
+                    })
+                    .then((res) => {
+                        console.log(res.data);
+                    })
+                    .catch((error) => console.log(error));
             }
             console.log("user in the auth satate Change", currentUser);
         });
