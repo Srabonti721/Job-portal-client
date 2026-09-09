@@ -6,12 +6,13 @@ import ApplicationStat from "./ApplicationStat";
 
 const MyApplications = () => {
     const { user } = useAuth();
+    console.log(user.accessToken)
     return (
         <div>
             <ApplicationStat />
             <Suspense fallback={"loading for listed data"}>
                 <ApplicationList
-                    myApplicationsPromice={myApplicationsPromice(user.email)}
+                    myApplicationsPromice={myApplicationsPromice(user.email,user.accessToken)}
                 />
             </Suspense>
         </div>

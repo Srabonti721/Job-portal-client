@@ -3,7 +3,6 @@ import TableRow from "./TableRow";
 
 const ApplicationList = ({ myApplicationsPromice }) => {
     const applications = use(myApplicationsPromice);
-    console.log(applications);
 
     return (
         <div>
